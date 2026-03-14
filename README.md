@@ -1,8 +1,6 @@
-# Todo Application - DSO Assignment 1
+# Todo Application- DSO Assignment 1
+**Student Name:**  Yonten Kinley Tenzin
 
-A full-stack todo list application with Docker containerization and automated deployment on Render.com.
-
-**Student Name:**  Yonten Kinley Tenzin 
 **Student ID:** 02230313  
 
 ---
@@ -32,7 +30,7 @@ This project implements a full-stack todo application with:
 ---
 
 
-## Step 0: Web Application Setup
+##  Web Application Setup
 
 ### Backend Setup
 
@@ -49,7 +47,7 @@ The backend is a RESTful API built with Express.js and PostgreSQL.
 ```env
 DB_HOST=localhost
 DB_USER=postgres
-DB_PASSWORD=yonten123
+DB_PASSWORD=your_local_postgres_password
 DB_NAME=todo_db
 DB_PORT=5432
 PORT=5000
@@ -71,16 +69,16 @@ Server runs on: `http://localhost:5000`
 The frontend is a React application with a clean, responsive UI.
 
 #### Features:
-- ✅ Add new tasks with title and description
-- ✅ Mark tasks as complete/incomplete
-- ✅ Edit existing tasks
-- ✅ Delete tasks
-- ✅ Real-time task statistics
-- ✅ Responsive design
+- Add new tasks with title
+- Mark tasks as complete/incomplete
+- Edit existing tasks
+- Delete tasks
+- Real-time task statistics
+- Responsive design
 
 #### Environment Variables (frontend/.env):
 ```env
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=http://localhost:5001
 ```
 
 #### Running Frontend Locally:
@@ -94,23 +92,23 @@ Application runs on: `http://localhost:3000`
 
 ---
 
-## 🐳 Part A: Docker Hub Deployment
+## Part A: Docker Hub Deployment
 
 ### Step 1: Build Docker Images
 
 #### Backend Image:
 ```bash
 cd backend
-docker build -t yourdockerhubusername/be-todo:02190108 .
+docker build -t yourdockerhubusername/be-todo:02230313 .
 ```
 
 #### Frontend Image:
 ```bash
 cd frontend
-docker build -t yourdockerhubusername/fe-todo:02190108 .
+docker build -t yourdockerhubusername/fe-todo:02230313 .
 ```
 
-**Note:** Replace `yourdockerhubusername` with your Docker Hub username and `02190108` with your student ID.
+**Note:** Replace `yourdockerhubusername` with your Docker Hub username and `02230313` with your student ID.
 
 ### Step 2: Push to Docker Hub
 
@@ -119,10 +117,10 @@ docker build -t yourdockerhubusername/fe-todo:02190108 .
 docker login
 
 # Push backend image
-docker push yourdockerhubusername/be-todo:02190108
+docker push yourdockerhubusername/be-todo:02230313
 
 # Push frontend image
-docker push yourdockerhubusername/fe-todo:02190108
+docker push yourdockerhubusername/fe-todo:02230313
 ```
 
 ### Step 3: Deploy on Render.com
@@ -139,7 +137,7 @@ docker push yourdockerhubusername/fe-todo:02190108
 #### B. Deploy Backend Service
 1. Click "New" → "Web Service"
 2. Select "Existing image from Docker Hub"
-3. Image URL: `yourdockerhubusername/be-todo:02190108`
+3. Image URL: `yourdockerhubusername/be-todo:02230313`
 4. Configure:
    - Name: `be-todo`
    - Region: Choose closest
@@ -157,7 +155,7 @@ docker push yourdockerhubusername/fe-todo:02190108
 #### C. Deploy Frontend Service
 1. Click "New" → "Web Service"
 2. Select "Existing image from Docker Hub"
-3. Image URL: `yourdockerhubusername/fe-todo:02190108`
+3. Image URL: `yourdockerhubusername/fe-todo:02230313`
 4. Configure:
    - Name: `fe-todo`
    - Region: Choose closest
@@ -170,7 +168,7 @@ docker push yourdockerhubusername/fe-todo:02190108
 
 ---
 
-## 🔄 Part B: Automated Deployment
+## Part B: Automated Deployment
 
 This setup enables automatic rebuilds and deployments whenever you push code to GitHub.
 
@@ -219,11 +217,11 @@ databases:
 5. Render will detect `render.yaml` automatically
 6. Click "Apply"
 
-**✨ Now, every time you push to GitHub, Render will automatically rebuild and redeploy your application!**
+**Now, every time you push to GitHub, Render will automatically rebuild and redeploy your application!**
 
 ---
 
-## 💻 Local Development
+## Local Development
 
 ### Using Docker Compose
 
@@ -242,7 +240,7 @@ docker-compose down
 
 Services will be available at:
 - Frontend: `http://localhost:80`
-- Backend: `http://localhost:5000`
+- Backend: `http://localhost:5001`
 - PostgreSQL: `localhost:5432`
 
 ### Manual Setup (Without Docker)
@@ -281,7 +279,7 @@ Services will be available at:
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ### Backend Variables
 
@@ -298,7 +296,7 @@ Services will be available at:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| REACT_APP_API_URL | Backend API URL | http://localhost:5000 |
+| REACT_APP_API_URL | Backend API URL | http://localhost:5001 |
 
 **Important:** 
 - Never commit `.env` files to Git
@@ -307,10 +305,10 @@ Services will be available at:
 
 ---
 
-## 📡 API Documentation
+## API Documentation
 
 ### Base URL
-- Local: `http://localhost:5000`
+- Local: `http://localhost:5001`
 - Production: `https://be-todo.onrender.com`
 
 ### Endpoints
@@ -340,7 +338,6 @@ Response:
     {
       "id": 1,
       "title": "Sample Task",
-      "description": "Task description",
       "completed": false,
       "created_at": "2024-03-11T10:00:00Z",
       "updated_at": "2026-03-11T10:00:00Z"
@@ -355,8 +352,7 @@ POST /tasks
 Content-Type: application/json
 
 {
-  "title": "New Task",
-  "description": "Optional description"
+  "title": "New Task"
 }
 ```
 
@@ -367,7 +363,6 @@ Content-Type: application/json
 
 {
   "title": "Updated Title",
-  "description": "Updated description",
   "completed": true
 }
 ```
@@ -379,7 +374,7 @@ DELETE /tasks/:id
 
 ---
 
-## 🌐 Deployment Links
+## Deployment Links
 
 ### Part A Deployment (Docker Hub Images)
 - **Frontend**: [https://fe-todo-partA.onrender.com](URL_HERE)
@@ -394,36 +389,36 @@ DELETE /tasks/:id
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Local Development
-![Local Development](.docs/screenshots/local-dev.png)
+![alt text](frontend/public/local_dev.png)
 
 ### Docker Hub
-![Docker Hub](.docs/screenshots/docker-hub.png)
+![alt text](frontend/public/render.png)
 
 ### Render Deployment
-![Render Dashboard](.docs/screenshots/render-dashboard.png)
+
 
 ### Application UI
-![Application Interface](.docs/screenshots/app-ui.png)
+
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Backend API
 ```bash
 # Health check
-curl http://localhost:5000/
+curl http://localhost:5001/
 
 # Get all tasks
-curl http://localhost:5000/tasks
+curl http://localhost:5001/tasks
 
 # Create a task
-curl -X POST http://localhost:5000/tasks \
+curl -X POST http://localhost:5001/tasks \
   -H "Content-Type: application/json" \
-  -d '{"title":"Test Task","description":"Testing API"}'
+  -d '{"title":"Test Task"}'
 ```
 
 ### Test Frontend
@@ -435,7 +430,7 @@ curl -X POST http://localhost:5000/tasks \
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Backend won't start
 - Check PostgreSQL is running
@@ -459,7 +454,7 @@ curl -X POST http://localhost:5000/tasks \
 
 ---
 
-## 📚 Resources
+## Resources
 
 - [Docker Documentation](https://docs.docker.com/)
 - [Render Documentation](https://render.com/docs)
@@ -469,53 +464,4 @@ curl -X POST http://localhost:5000/tasks \
 
 ---
 
-## ✅ Checklist
 
-### Step 0 - Application
-- [x] Backend API with CRUD operations
-- [x] Frontend React UI
-- [x] PostgreSQL database integration
-- [x] Environment variables configured
-- [x] Local testing completed
-
-### Part A - Docker Hub
-- [ ] Backend Dockerfile created
-- [ ] Frontend Dockerfile created
-- [ ] Images built with student ID tag
-- [ ] Images pushed to Docker Hub
-- [ ] Render PostgreSQL database created
-- [ ] Backend service deployed on Render
-- [ ] Frontend service deployed on Render
-- [ ] Application tested in production
-
-### Part B - Automated Deployment
-- [ ] render.yaml configured
-- [ ] GitHub repository created
-- [ ] Code pushed to GitHub
-- [ ] Render Blueprint deployed
-- [ ] Automatic deployment tested (push to GitHub)
-
-### Documentation
-- [ ] README.md completed
-- [ ] Screenshots added
-- [ ] Deployment URLs documented
-- [ ] GitHub repository finalized
-
----
-
-## 👤 Author
-
-**[Your Name]**  
-Student ID: [Your Student Number]  
-Course: DSO101  
-Assignment: A1
-
----
-
-## 📝 License
-
-This project is for educational purposes as part of DSO101 coursework.
-
----
-
-**Last Updated:** March 11, 2026
