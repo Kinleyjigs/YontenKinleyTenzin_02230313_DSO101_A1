@@ -2,28 +2,12 @@
 
 A full-stack todo list application with Docker containerization and automated deployment on Render.com.
 
-**Student Name:** [Your Name]  
-**Student ID:** [Your Student Number]  
-**Assignment:** DSO101_A1
+**Student Name:**  Yonten Kinley Tenzin 
+**Student ID:** 02230313  
 
 ---
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Step 0: Web Application Setup](#step-0-web-application-setup)
-- [Part A: Docker Hub Deployment](#part-a-docker-hub-deployment)
-- [Part B: Automated Deployment](#part-b-automated-deployment)
-- [Local Development](#local-development)
-- [Environment Variables](#environment-variables)
-- [API Documentation](#api-documentation)
-- [Deployment Links](#deployment-links)
-
----
-
-## 🎯 Overview
+## Overview
 
 This project implements a full-stack todo application with:
 - **Frontend**: React-based UI for task management
@@ -34,7 +18,7 @@ This project implements a full-stack todo application with:
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Component | Technology |
 |-----------|------------|
@@ -47,60 +31,25 @@ This project implements a full-stack todo application with:
 
 ---
 
-## 📁 Project Structure
 
-```
-DSO_assign1/
-├── backend/
-│   ├── server.js              # Main server file
-│   ├── db.js                  # Database connection
-│   ├── package.json           # Backend dependencies
-│   ├── Dockerfile             # Backend Docker configuration
-│   ├── .env.example           # Environment variables template
-│   ├── .env                   # Local environment variables (not in git)
-│   ├── .env.production        # Production environment template
-│   └── README.md              # Backend documentation
-├── frontend/
-│   ├── public/
-│   │   └── index.html         # HTML template
-│   ├── src/
-│   │   ├── App.js             # Main React component
-│   │   ├── App.css            # Application styles
-│   │   ├── api.js             # API service layer
-│   │   ├── index.js           # React entry point
-│   │   └── index.css          # Global styles
-│   ├── package.json           # Frontend dependencies
-│   ├── Dockerfile             # Frontend Docker configuration
-│   ├── .env.example           # Environment variables template
-│   ├── .env                   # Local environment variables (not in git)
-│   ├── .env.production        # Production environment template
-│   └── README.md              # Frontend documentation
-├── docker-compose.yml         # Multi-container orchestration
-├── render.yaml                # Render deployment blueprint
-├── .gitignore                 # Git ignore rules
-└── README.md                  # This file
-```
-
----
-
-## 🚀 Step 0: Web Application Setup
+## Step 0: Web Application Setup
 
 ### Backend Setup
 
 The backend is a RESTful API built with Express.js and PostgreSQL.
 
 #### Features:
-- ✅ CRUD operations for tasks
-- ✅ PostgreSQL database integration
-- ✅ Environment variable configuration
-- ✅ CORS enabled for frontend communication
-- ✅ Auto-initialization of database tables
+- CRUD operations for tasks
+- PostgreSQL database integration
+- Environment variable configuration
+- CORS enabled for frontend communication
+- Auto-initialization of database tables
 
 #### Environment Variables (backend/.env):
 ```env
 DB_HOST=localhost
 DB_USER=postgres
-DB_PASSWORD=yourpassword
+DB_PASSWORD=yonten123
 DB_NAME=todo_db
 DB_PORT=5432
 PORT=5000
