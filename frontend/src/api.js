@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Get API URL from environment variable
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// Always default to the Render backend URL when env is missing.
+const API_URL = (process.env.REACT_APP_API_URL || 'https://todo-backend-latest-kr1t.onrender.com').trim();
 
 // Create axios instance with base configuration
 const api = axios.create({

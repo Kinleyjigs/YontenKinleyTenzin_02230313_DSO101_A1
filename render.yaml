@@ -3,8 +3,9 @@ services:
   - type: web
     name: be-todo
     env: docker
-    image:
-      url: docker.io/yonten1234567890/todo-backend:02230313-v2
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    autoDeploy: true
     envVars:
       - key: DB_HOST
         fromDatabase:
@@ -31,8 +32,12 @@ services:
   - type: web
     name: fe-todo
     env: docker
-    image:
-      url: docker.io/yonten1234567890/todo-frontend:02230313-v4
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    autoDeploy: true
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://be-todo.onrender.com
 
 # Database (PostgreSQL)
 databases:

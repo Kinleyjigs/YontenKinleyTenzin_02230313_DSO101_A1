@@ -1,210 +1,205 @@
-# Todo Application - DSO Assignment 1
 
-**Student Name:** Yonten Kinley Tenzin  
-**Student ID:** 02230313
+# DSO101 Assignment 1 - Todo Application
 
----
+Student Name: Yonten Kinley Tenzin  
+Student ID: 02230313
 
-## Overview
+GitHub Repository: [YontenKinleyTenzin_02230313_DSO101_A1](https://github.com/Kinleyjigs/YontenKinleyTenzin_02230313_DSO101_A1.git)
 
-Full-stack todo application deployed on Render with React frontend, Express backend, and PostgreSQL database. Application is containerized with Docker and automatically deployed via GitHub integration.
+This submission follows the required assignment structure:  
+`studentname_studentnumber_DSO101_A1`
 
----
+## 1. Project Overview (Step 0 Prerequisite)
 
-## Active Deployment Links
+This is a full-stack Todo List web application with:
+- Frontend (React): Add, edit, delete, and mark tasks complete.
+- Backend (Node.js + Express): CRUD API for tasks.
+- Database (PostgreSQL): Persistent storage.
 
-**Frontend:** [https://todo-frontend-latest-zfjg.onrender.com/](https://todo-frontend-latest-zfjg.onrender.com/)
+## 2. Tech Stack
 
-**Backend API:** [https://todo-backend-latest-kr1t.onrender.com](https://todo-backend-latest-kr1t.onrender.com)
+- Frontend: React + Axios
+- Backend: Node.js + Express
+- Database: PostgreSQL
+- Containerization: Docker + Docker Compose
+- Deployment: Render + Docker Hub
 
----
+## 3. Environment Variables (.env)
 
-## Tech Stack
+Environment variables are used for environment-specific values (API URL, DB credentials, server port).
 
-| Component | Technology |
-|-----------|------------|
-| Frontend | React 18, Axios, CSS3 |
-| Backend | Node.js 18, Express.js |
-| Database | PostgreSQL |
-| Containerization | Docker |
-| Deployment | Render.com |
-| CI/CD | GitHub + render.yaml Blueprint |
+Important rule:
+- Never commit real `.env` files to Git.
+- `.env` is ignored in `.gitignore`.
+- Use example/template files for reference.
 
----
+### Backend .env variables
 
-## Part A: Docker Hub & Render Deployment
+Create `backend/.env` from `backend/.env.example`:
 
-### 1. Build Docker Images & Push to Docker Hub
-
-```bash
-
-docker login
-
-# Backend
-docker buildx build --platform linux/amd64 -t yonten1234567890/todo-backend:02230313 --push ./backend
-
-# Frontend
-docker buildx build --platform linux/amd64 -t yonten1234567890/todo-frontend:02230313 --push ./frontend
-```
-
-### 2. Deploy on Render
-
-**Backend Service:**
-- Image: `yonten1234567890/todo-backend`
-- Port: 5000
-- Environment: 
-  - `DATABASE_URL` (Render PostgreSQL connection string)
-  - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_PORT`
-
-**Frontend Service:**
-- Image: `yonten1234567890/todo-frontend`
-- Port: 80
-- Environment:
-  - `REACT_APP_API_URL=https://todo-backend-latest-kr1t.onrender.com`
-
-**Database:**
-- Render PostgreSQL managed service
-
----
-
-## Part B: Automated Deployment
-
-### render.yaml Blueprint
-
-```yaml
-services:
-  - type: web
-    name: be-todo
-    env: docker
-    dockerfilePath: ./backend/Dockerfile
-    envVars:
-      - key: DATABASE_URL
-        value: ${{ secrets.DATABASE_URL }}
-      - key: PORT
-        value: 5000
-
-  - type: web
-    name: fe-todo
-    env: docker
-    dockerfilePath: ./frontend/Dockerfile
-    envVars:
-      - key: REACT_APP_API_URL
-        value: https://todo-backend-latest-kr1t.onrender.com
-
-databases:
-  - name: todo-db
-    databaseName: todo_db
-    user: todo_user
-```
-
-### Deployment Process
-
-1. Push code to GitHub
-2. Connect GitHub repo to Render
-3. Render auto-detects `render.yaml`
-4. Services build and deploy automatically
-5. Every git push triggers a new deployment
-
----
-
-## Features
-
-- Add, edit, delete tasks  
-- Mark tasks as complete/incomplete  
-- Real-time task updates  
-- Persistent database storage  
-- Responsive UI design  
-- Docker containerized  
-- Auto-deploy on git push  
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Health check |
-| GET | `/tasks` | Get all tasks |
-| POST | `/tasks` | Create task |
-| PUT | `/tasks/:id` | Update task |
-| DELETE | `/tasks/:id` | Delete task |
-
----
-
-## Environment Variables
-
-**Backend (.env):**
 ```env
-DATABASE_URL=postgres://user:password@host:5432/todo_db
-DB_HOST=your-render-host
-DB_USER=todo_user
+DB_HOST=localhost
+DB_USER=postgres
 DB_PASSWORD=your_password
 DB_NAME=todo_db
 DB_PORT=5432
 PORT=5000
 ```
 
-**Frontend (.env):**
+### Frontend .env variables
+
+Create `frontend/.env` from `frontend/.env.example`:
+
 ```env
-REACT_APP_API_URL=https://todo-backend-latest-kr1t.onrender.com
+REACT_APP_API_URL=http://localhost:5000
 ```
 
-⚠️ **Never commit .env files to Git!**
+For production, set this to your live backend URL, for example:
 
----
+```env
+REACT_APP_API_URL=https://be-todo.onrender.com
+```
 
-## Deployment Screenshots
+## 4. How Frontend, Backend, and DB Are Connected
+
+Local/dev connection flow:
+1. Frontend sends API requests to `REACT_APP_API_URL`.
+2. Backend receives requests on `PORT` (default `5000`).
+3. Backend connects to PostgreSQL using `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`.
+4. Backend performs CRUD and returns JSON to frontend.
+
+Render connection flow:
+1. Frontend service uses `REACT_APP_API_URL=https://be-todo.onrender.com`.
+2. Backend service receives DB credentials via Render environment variables (or Render linked DB values).
+3. Backend connects to Render PostgreSQL and serves API responses.
+
+Current API endpoints:
+- `GET /tasks`
+- `POST /tasks`
+- `PUT /tasks/:id`
+- `DELETE /tasks/:id`
+
+## 5. Local Run Instructions
+
+### Option A: Run services individually
+
+Backend:
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+npm start
+```
+
+### Option B: Run using Docker Compose
+
+From project root:
+
+```bash
+docker-compose up --build
+```
+
+Default ports from compose:
+- Frontend: `http://localhost`
+- Backend: `http://localhost:5001`
+- PostgreSQL: `localhost:5432`
+
+## 6. Part A - Build and Push Pre-built Images to Docker Hub
+
+Requirement: Use student ID as the image tag.
+
+Backend image:
+
+```bash
+docker build -t yonten1234567890/todo-backend:02230313 ./backend
+docker push yonten1234567890/todo-backend:02230313
+```
+
+Frontend image:
+
+```bash
+docker build -t yonten1234567890/todo-frontend:02230313 ./frontend
+docker push yonten1234567890/todo-frontend:02230313
+```
+
+## 7. Part A - Deploy Docker Images on Render
+
+Backend web service:
+- Deploy from existing Docker Hub image: `yonten1234567890/todo-backend:02230313`
+- Set environment variables:
+   - `DB_HOST`
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `DB_NAME`
+   - `DB_PORT`
+   - `PORT=5000`
+
+Frontend web service:
+- Deploy from existing Docker Hub image: `yonten1234567890/todo-frontend:02230313`
+- Set:
+   - `REACT_APP_API_URL=https://be-todo.onrender.com`
+
+Database:
+- Use Render PostgreSQL managed database.
+
+## 8. Part B - Automated Build and Deployment from GitHub (Blueprint)
+
+This repository includes `render.yaml` for multi-service deployment:
+- Backend service built from `backend/Dockerfile`
+- Frontend service built from `frontend/Dockerfile`
+- Managed PostgreSQL database
+
+Render Blueprint behavior:
+- On each new Git commit pushed to GitHub, Render rebuilds and redeploys services automatically.
+
+## 9. Live Deployment Links
+
+- Frontend: https://todo-frontend-02230313.onrender.com/
+- Backend API: https://todo-backend-latest-kr1t.onrender.com
+
+Quick API test:
+
+```bash
+curl https://todo-backend-latest-kr1t.onrender.com/tasks
+```
+
+## 10. Evidence / Screenshots
 
 ### Local Development
 ![Local Development Setup](frontend/public/local_dev.png)
 
-### Docker Hub
+### Docker Hub Repository
 ![Docker Hub Repository](frontend/public/dockerhub.png)
 
-### Docker Hub frontend
-![alt text](frontend/public/frontend.png)
+### Docker Hub Frontend Image
+![Frontend Image](frontend/public/frontend.png)
 
-### Docker Hub backend
-![alt text](frontend/public/backend.png)
+### Docker Hub Backend Image
+![Backend Image](frontend/public/backend.png)
 
 ### Render Deployment
 ![Render Dashboard](frontend/public/render.png)
 
 ### Live Application
-![alt text](frontend/public/applicationUI.png)
+![Application UI](frontend/public/applicationUI.png)
 
----
+## 11. References
+- react documentation: https://react.dev/
+- Docker documentation: https://docs.docker.com/
+- Build and push image: https://docs.docker.com/get-started/introduction/build-and-push-first-image/
+- Render image deployment: https://render.com/docs/deploying-an-image
+- Render environment variables: https://render.com/docs/configure-environment-variables
+- Render Blueprint spec: https://render.com/docs/blueprint-spec
 
-## Testing
-
-Test live backend:
-```bash
-curl https://todo-backend-latest-kr1t.onrender.com/tasks
-```
-
-Or visit the [frontend](https://todo-frontend-latest-zfjg.onrender.com/) directly to test the app.
-
----
-
-## Key Lessons
-
-1. **Environment variables** separate config from code
-2. **Docker** ensures consistent environments across machines
-3. **Render Blueprint** automates multi-service deployments
-4. **GitHub integration** enables CI/CD pipelines
-5. **ARM compatibility** needed for M1/M2 Macs (use buildx)
-6. **DATABASE_URL** simplifies cloud database connections
-
----
-
-## Resources
-
-- [Docker Docs](https://docs.docker.com/)
-- [Render Docs](https://render.com/docs)
-- [Express.js](https://expressjs.com/)
-- [React](https://react.dev/)
-- [PostgreSQL](https://www.postgresql.org/docs/)
-
----
 
 
