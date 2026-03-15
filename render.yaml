@@ -3,29 +3,15 @@ services:
   - type: web
     name: be-todo
     env: docker
-    dockerfilePath: ./backend/Dockerfile
-    envVars:
-      - key: DB_HOST
-        sync: false
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_NAME
-        value: todo_db
-      - key: DB_PORT
-        value: 5432
-      - key: PORT
-        value: 5000
+    image:
+      url: docker.io/yonten1234567890/todo-backend:02230313
 
   # Frontend Web Service
   - type: web
     name: fe-todo
     env: docker
-    dockerfilePath: ./frontend/Dockerfile
-    envVars:
-      - key: REACT_APP_API_URL
-        value: https://todo-backend-latest-kr1t.onrender.com
+    image:
+      url: docker.io/yonten1234567890/todo-frontend:02230313
 
 # Database (PostgreSQL)
 databases:
