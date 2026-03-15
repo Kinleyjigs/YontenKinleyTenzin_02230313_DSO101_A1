@@ -4,7 +4,7 @@ services:
     name: be-todo
     env: docker
     image:
-      url: docker.io/yonten1234567890/todo-backend:02230313
+      url: docker.io/yonten1234567890/todo-backend:02230313-v2
     envVars:
       - key: DB_HOST
         fromDatabase:
@@ -32,7 +32,7 @@ services:
     name: fe-todo
     env: docker
     image:
-      url: docker.io/yonten1234567890/todo-frontend:02230313
+      url: docker.io/yonten1234567890/todo-frontend:02230313-v2
 
 # Database (PostgreSQL)
 databases:
