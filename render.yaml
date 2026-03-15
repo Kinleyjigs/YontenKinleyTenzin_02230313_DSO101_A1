@@ -32,7 +32,7 @@ services:
     name: fe-todo
     env: docker
     image:
-      url: docker.io/yonten1234567890/todo-frontend:02230313-v3
+      url: docker.io/yonten1234567890/todo-frontend:02230313-v4
 
 # Database (PostgreSQL)
 databases:
