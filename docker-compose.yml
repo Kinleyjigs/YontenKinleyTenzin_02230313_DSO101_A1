@@ -18,9 +18,7 @@ services:
 
   # Backend Service
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: yonten1234567890/todo-backend:02230313
     container_name: todo-backend
     environment:
       DB_HOST: postgres
@@ -38,12 +36,10 @@ services:
 
   # Frontend Service
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        REACT_APP_API_URL: http://localhost:5001
+    image: yonten1234567890/todo-frontend:02230313
     container_name: todo-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:5001
     ports:
       - "80:80"
     depends_on:

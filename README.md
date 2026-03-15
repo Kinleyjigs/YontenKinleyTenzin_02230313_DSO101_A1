@@ -13,7 +13,7 @@ Full-stack todo application deployed on Render with React frontend, Express back
 
 ## Active Deployment Links
 
-**Frontend:** [https://todo-frontend-deploy1-dw8d.onrender.com](https://todo-frontend-deploy1-dw8d.onrender.com)
+**Frontend:** [https://todo-frontend-latest-zfjg.onrender.com/](https://todo-frontend-latest-zfjg.onrender.com/)
 
 **Backend API:** [https://todo-backend-latest-kr1t.onrender.com](https://todo-backend-latest-kr1t.onrender.com)
 
@@ -41,10 +41,10 @@ Full-stack todo application deployed on Render with React frontend, Express back
 docker login
 
 # Backend
-docker buildx build --platform linux/amd64 -t yonten1234567890/todo-backend:latest --push ./backend
+docker buildx build --platform linux/amd64 -t yonten1234567890/todo-backend:02230313 --push ./backend
 
 # Frontend
-docker buildx build --platform linux/amd64 -t yonten1234567890/todo-frontend:latest --push ./frontend
+docker buildx build --platform linux/amd64 -t yonten1234567890/todo-frontend:02230313 --push ./frontend
 ```
 
 ### 2. Deploy on Render
@@ -160,6 +160,12 @@ REACT_APP_API_URL=https://todo-backend-latest-kr1t.onrender.com
 
 ### Docker Hub
 ![Docker Hub Repository](frontend/public/dockerhub.png)
+
+### Docker Hub frontend
+![alt text](frontend/public/frontend.png)
+
+### Docker Hub backend
+![alt text](frontend/public/backend.png)
 
 ### Render Deployment
 ![Render Dashboard](frontend/public/render.png)
