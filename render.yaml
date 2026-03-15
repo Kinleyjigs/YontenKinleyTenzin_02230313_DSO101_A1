@@ -25,10 +25,7 @@ services:
     dockerfilePath: ./frontend/Dockerfile
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          type: web
-          name: be-todo
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://todo-backend-latest-kr1t.onrender.com
 
 # Database (PostgreSQL)
 databases:
