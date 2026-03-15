@@ -5,6 +5,27 @@ services:
     env: docker
     image:
       url: docker.io/yonten1234567890/todo-backend:02230313
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: todo-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: todo-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: todo-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: todo-db
+          property: database
+      - key: DB_PORT
+        value: "5432"
+      - key: PORT
+        value: "5000"
 
   # Frontend Web Service
   - type: web
