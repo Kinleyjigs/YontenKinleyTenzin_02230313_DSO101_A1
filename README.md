@@ -6,9 +6,6 @@ Student ID: 02230313
 
 GitHub Repository: [YontenKinleyTenzin_02230313_DSO101_A1](https://github.com/Kinleyjigs/YontenKinleyTenzin_02230313_DSO101_A1.git)
 
-This submission follows the required assignment structure:  
-`studentname_studentnumber_DSO101_A1`
-
 ## 1. Project Overview (Step 0 Prerequisite)
 
 This is a full-stack Todo List web application with:
