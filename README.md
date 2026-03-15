@@ -6,7 +6,7 @@ Student ID: 02230313
 
 GitHub Repository: [YontenKinleyTenzin_02230313_DSO101_A1](https://github.com/Kinleyjigs/YontenKinleyTenzin_02230313_DSO101_A1.git)
 
-## 1. Project Overview (Step 0 Prerequisite)
+## 1. Project Overview 
 
 This is a full-stack Todo List web application with:
 - Frontend (React): Add, edit, delete, and mark tasks complete.
