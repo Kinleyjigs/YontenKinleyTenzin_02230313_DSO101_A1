@@ -3,6 +3,7 @@ services:
   - type: web
     name: be-todo
     env: docker
+    plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     autoDeploy: true
@@ -32,6 +33,7 @@ services:
   - type: web
     name: fe-todo
     env: docker
+    plan: free
     dockerfilePath: ./frontend/Dockerfile
     dockerContext: ./frontend
     autoDeploy: true
