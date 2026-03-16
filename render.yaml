@@ -9,25 +9,19 @@ services:
     autoDeploy: true
     envVars:
       - key: DB_HOST
-        fromDatabase:
-          name: todo-db
-          property: host
+        value: dpg-d6r4d4vafjfc73f0gsd0-a.singapore-postgres.render.com
       - key: DB_USER
-        fromDatabase:
-          name: todo-db
-          property: user
+        value: todo_admin
       - key: DB_PASSWORD
-        fromDatabase:
-          name: todo-db
-          property: password
+        value: Q2WvEO1Jry9evX1cRtDA6TQgBdxUVrZJ
       - key: DB_NAME
-        fromDatabase:
-          name: todo-db
-          property: database
+        value: todo_db_c3j8
       - key: DB_PORT
         value: "5432"
       - key: PORT
         value: "5000"
+      - key: NODE_ENV
+        value: production 
 
   # Frontend Web Service
   - type: web
@@ -35,14 +29,9 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./frontend/Dockerfile
-    dockerContext: ./frontend
-    autoDeploy: true
     envVars:
       - key: REACT_APP_API_URL
         value: https://be-todo.onrender.com
+      - key: NODE_ENV
+        value: production
 
-# Database (PostgreSQL)
-databases:
-  - name: todo-db
-    databaseName: todo_db
-    user: todo_user
